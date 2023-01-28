@@ -14,17 +14,24 @@ pipeline {
         }
         stage('plan deplyoment') {
             steps {
-                sh 'terraform init'
-                sh 'terraform plan'
-                input id: 'Approve_tf_plan', message: 'do you approve the above plan?', ok: 'approve'
+                dir('azure/terraform') {
+                    sh 'terraform init'
+                    sh 'terraform plan'
+                    input id: 'Approve_tf_plan', message: 'do you approve the above plan?', ok: 'approve'
+                }       
+                
                 
             }
         }
         stage('Deploy AKS'){
             steps{
+                dir('azure/terraform'){
                 sh 'terraform apply -auto-approve'
-
+                }
             }
+        }
+        stage('clean workspace'){
+            cleanWs cleanWhenFailure: false, notFailBuild: true
         }
         
     }
