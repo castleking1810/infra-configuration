@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'master', url: 'https://github.com/castleking1810/infra-configuration.git'
+            }
+        }
+        stage('import tf env variables'){
+            steps{
+                sh 'source /etc/cicd/tf/sp.env'
+            }
+        }
+        stage('plan deplyoment') {
+            steps {
+                sh 'terraform init'
+                sh 'terraform plan'
+                input id: 'Approve_tf_plan', message: 'do you approve the above plan?', ok: 'approve'
+                
+            }
+        }
+        stage('Deploy AKS'){
+            steps{
+                sh 'terraform apply -auto-approve'
+
+            }
+        }
+        
+    }
+}
