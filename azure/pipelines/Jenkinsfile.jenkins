@@ -9,7 +9,7 @@ pipeline {
         }
         stage('import tf env variables'){
             steps{
-                sh 'source /etc/cicd/tf/sp.env'
+                sh '. /etc/cicd/tf/sp.env'
             }
         }
         stage('plan deplyoment') {
