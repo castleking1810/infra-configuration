@@ -31,7 +31,10 @@ pipeline {
             }
         }
         stage('clean workspace'){
-            cleanWs cleanWhenFailure: false, notFailBuild: true
+            steps{
+                cleanWs cleanWhenFailure: false, notFailBuild: true
+            }
+            
         }
         
     }
