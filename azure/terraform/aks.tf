@@ -39,7 +39,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
     docker_bridge_cidr = "172.17.0.1/16"
   }
 
-  
+  tags = {
+    "application" = "erel"
+  }
 }
 
 # resource "azurerm_kubernetes_cluster_node_pool" "dev-pool" {
