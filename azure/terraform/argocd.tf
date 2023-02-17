@@ -29,7 +29,7 @@ module "argocd" {
 
   ingress_host        = "argocd.example.com"
   ingress_annotations = local.argocd_ingress_annotations
-  repositories        = local.argocd_repositories
+  #repositories        = local.argocd_repositories
   # Argocd Config
   config = {
     "accounts.image-updater" = "apiKey"
