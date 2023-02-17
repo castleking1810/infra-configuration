@@ -1,5 +1,5 @@
 variable "location" {
-  default     = "ue"
+  default     = "us-east"
   description = "azure location for aks cluster"
 }
 variable "resource_group_name" {
