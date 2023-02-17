@@ -22,7 +22,12 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
+  features {}  
+  
+  subscription_id = "adf09ed2-68bb-45df-b407-c5df02db378b"
+  client_id       = "ecd238ff-da4d-480e-bf89-6450ddb17b37"
+  client_secret   = "rFj8Q~a~SrqqWi56zdWLrCK1lNeyaiP4UMjgadcD"
+  tenant_id       = "78820852-55fa-450b-908d-45c0d911e76b"
 }
 
 data "azurerm_kubernetes_cluster" "aks_cluster" {
