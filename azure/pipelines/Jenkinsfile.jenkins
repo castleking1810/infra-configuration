@@ -15,7 +15,7 @@ pipeline {
         stage('plan deplyoment') {
             steps {
                 dir('azure/terraform') {
-                    sh 'terraform init'
+                    sh 'terraform init -upgrade'
                     sh 'terraform plan'
                     input id: 'Approve_tf_plan', message: 'do you approve the above plan?', ok: 'approve'
                 }       
