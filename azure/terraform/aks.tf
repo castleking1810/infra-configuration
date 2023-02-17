@@ -14,14 +14,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
     }
   }
 
-  linux_profile {
-    admin_username = "aksuser"
+  # linux_profile {
+  #   admin_username = "aksuser"
 
-    ssh_key {
-      key_data = file("~/.ssh/id_rsa.pub")
+  #   ssh_key {
+  #     key_data = file("~/.ssh/id_rsa.pub")
 
-    }
-  }
+  #   }
+  # }
 
   identity {
     type = "SystemAssigned"
