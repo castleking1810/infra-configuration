@@ -1,7 +1,7 @@
-# gets list of currently supported cloud providers from available folders
+// gets list of currently supported cloud providers from available folders
 def findDirectories(path){
     def dirs = []
-    #get files from root dir, and loop over them to find relevant dirs
+    //get files from root dir, and loop over them to find relevant dirs
     new File(path).listFiles().each { file ->
         if (file.isDirectory()) {
             dirs.add(file.getName)
@@ -12,18 +12,18 @@ def findDirectories(path){
 
 pipeline {
 
-    # agents to run on
+    // agents to run on
     agent any
 
-    # set build parameters
+    // set build parameters
     parameters{
         choice(name: 'provider', choices: findDirectories('.') , description:'select a cloud provider to deploy to')
     }
 
-    # set stages
+    // set stages
     stages {
 
-        # checkout code from github
+        // checkout code from github
         stage('Checkout Code') {
             steps {
                 git branch: 'master', url: 'https://github.com/castleking1810/infra-configuration.git'
