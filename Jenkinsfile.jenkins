@@ -4,7 +4,7 @@ def findDirectories(path){
     //get files from root dir, and loop over them to find relevant dirs
     new File(path).listFiles().each { file ->
         if (file.isDirectory()) {
-            dirs.add(file.getName)
+            dirs.add(file.getName())
         }
     }
     return dirs
