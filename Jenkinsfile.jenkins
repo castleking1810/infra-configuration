@@ -1,7 +1,29 @@
+# gets list of currently supported cloud providers from available folders
+def findDirectories(path){
+    def dirs = []
+    #get files from root dir, and loop over them to find relevant dirs
+    new File(path).listFiles().each { file ->
+        if (file.isDirectory()) {
+            dirs.add(file.getName)
+        }
+    }
+    return dirs
+}
+
 pipeline {
+
+    # agents to run on
     agent any
 
+    # set build parameters
+    parameters{
+        choice(name: 'provider', choices: findDirectories('.') , description:'select a cloud provider to deploy to')
+    }
+
+    # set stages
     stages {
+
+        # checkout code from github
         stage('Checkout Code') {
             steps {
                 git branch: 'master', url: 'https://github.com/castleking1810/infra-configuration.git'
@@ -12,9 +34,9 @@ pipeline {
                 sh '. /etc/cicd/tf/sp.env'
             }
         }
-        stage('plan deplyoment') {
+        stage('plan deplyoment for ${params.provider} managed k8s service') {
             steps {
-                dir('azure/terraform') {
+                dir(${params.provider}) {
                     sh 'terraform init -upgrade'
                     sh 'terraform plan'
                     input id: 'Approve_tf_plan', message: 'do you approve the above plan?', ok: 'approve'
@@ -23,9 +45,9 @@ pipeline {
                 
             }
         }
-        stage('Deploy AKS'){
+        stage('Deploy ${params.provider} managed k8s service'){
             steps{
-                dir('azure/terraform'){
+                dir(${params.provider}){
                 sh 'terraform apply -auto-approve'
                 }
             }
