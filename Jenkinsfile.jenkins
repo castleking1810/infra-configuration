@@ -34,9 +34,9 @@ pipeline {
                 sh '. /etc/cicd/tf/sp.env'
             }
         }
-        stage('plan deplyoment') {
+        stage('plan deplyoment for ${params.provider} managed k8s service') {
             steps {
-                dir('azure/terraform') {
+                dir(${params.provider}) {
                     sh 'terraform init -upgrade'
                     sh 'terraform plan'
                     input id: 'Approve_tf_plan', message: 'do you approve the above plan?', ok: 'approve'
@@ -45,9 +45,9 @@ pipeline {
                 
             }
         }
-        stage('Deploy AKS'){
+        stage('Deploy ${params.provider} managed k8s service'){
             steps{
-                dir('azure/terraform'){
+                dir(${params.provider}){
                 sh 'terraform apply -auto-approve'
                 }
             }
