@@ -16,9 +16,9 @@ pipeline {
     agent any
 
     // set build parameters
-    parameters{
-        choice(name: 'provider', choices: findDirectories('.') , description:'select a cloud provider to deploy to')
-    }
+    //parameters{
+    //    choice(name: 'provider', choices: findDirectories('.') , description:'select a cloud provider to deploy to')
+    //}
 
     // set stages
     stages {
@@ -27,6 +27,20 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'master', url: 'https://github.com/castleking1810/infra-configuration.git'
+            }
+        }
+
+        // find currently supported cloud providers
+        stage('Choose provider') {
+            steps {
+                script {
+                    def providers = findDirectories('.')
+                    def provider = input(
+                        id: 'provider',
+                        message: 'Choose a cloud provider to deploy its managed k8s service:',
+                        parameters: [choice(choices: providers, name: 'Provider')]
+                    )
+                }
             }
         }
         stage('import tf env variables'){
