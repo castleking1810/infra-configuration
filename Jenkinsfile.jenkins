@@ -1,5 +1,5 @@
 // gets list of currently supported cloud providers from available folders
-def findDirectories(path){
+def findProviders(path){
     def dirs = []
     //get files from root dir, and loop over them to find relevant dirs
     new File(path).listFiles().each { file ->
@@ -9,6 +9,9 @@ def findDirectories(path){
     }
     return dirs
 }
+
+//global parameter for provider choice
+def provider
 
 pipeline {
 
@@ -34,8 +37,12 @@ pipeline {
         stage('Choose provider') {
             steps {
                 script {
-                    def providers = findDirectories('.')
-                    def provider = input(
+
+                    // execute findProviders on build workspace
+                    def providers = findProviders(pwd())
+
+                    // prompt user for cloud deployment target, using the providers list generated
+                    provider = input(
                         id: 'provider',
                         message: 'Choose a cloud provider to deploy its managed k8s service:',
                         parameters: [choice(choices: providers, name: 'Provider')]
@@ -48,9 +55,9 @@ pipeline {
                 sh '. /etc/cicd/tf/sp.env'
             }
         }
-        stage('plan deplyoment for ${params.provider} managed k8s service') {
+        stage('plan deplyoment') {
             steps {
-                dir('${params.provider}') {
+                dir(provider) {
                     sh 'terraform init -upgrade'
                     sh 'terraform plan'
                     input id: 'Approve_tf_plan', message: 'do you approve the above plan?', ok: 'approve'
@@ -59,9 +66,9 @@ pipeline {
                 
             }
         }
-        stage('Deploy ${params.provider} managed k8s service'){
+        stage('Deploy'){
             steps{
-                dir('${params.provider}'){
+                dir(provider){
                 sh 'terraform apply -auto-approve'
                 }
             }
