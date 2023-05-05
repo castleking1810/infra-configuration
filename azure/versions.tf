@@ -3,7 +3,7 @@ terraform {
     resource_group_name  = "Erel-RG"
     storage_account_name = "erelsa"
     container_name       = "tfstate"
-    key                  = "k8s-cloud-deployment"
+    key                  = "aks-cloud-deployment"
   }
 
   required_providers {
