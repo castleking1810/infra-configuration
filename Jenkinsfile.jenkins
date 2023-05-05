@@ -75,9 +75,11 @@ pipeline {
         stage('plan deplyoment') {
             steps {
                 dir(provider) {
-                    sh 'terraform init -upgrade'
-                    sh 'terraform plan'
-                    input id: 'Approve_tf_plan', message: 'do you approve the above plan?', ok: 'approve'
+                    withVault(configuration: configuration, vaultSecrets: secrets) {
+                        sh 'terraform init -upgrade'
+                        sh 'terraform plan'
+                        input id: 'Approve_tf_plan', message: 'do you approve the above plan?', ok: 'approve'
+                    }
                 }       
                 
                 
