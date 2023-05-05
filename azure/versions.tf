@@ -1,7 +1,11 @@
 terraform {
-  backend "local" {
-    path = "/etc/cicd/tf/tfstate/azure-aks.tfstate"
+  backend "azurerm" {
+    resource_group_name  = "Erel-RG"
+    storage_account_name = "erelsa"
+    container_name       = "tfstate"
+    key                  = "k8s-cloud-deployment"
   }
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
