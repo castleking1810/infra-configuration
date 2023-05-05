@@ -8,14 +8,20 @@ terraform {
       version = "~> 2.5.0"
     }
 
+    # vault = {
+    #   source = "hashicorp/vault"
+    #   version = "3.14.0"
+    # }
   }
 }
+
+# provider "vault" {
+#   address = "https://vault.consolenetwork.com:8200"
+
+#   ca_cert_file = "/etc/vault.d/certs/ca.crt"
+# }
 
 provider "azurerm" {
   features {}
 
-  subscription_id = ""
-  client_id       = ""
-  client_secret   = ""
-  tenant_id       = ""
 }
