@@ -9,7 +9,7 @@ resource "helm_release" "traefik" {
   namespace  = "argocd"
   repository = "https://helm.traefik.io/traefik"
   chart      = "traefik"
-  values     = ["${file("values/traefik.yaml")}"]
+  values     = ["${file("./values/traefik.yaml")}"]
 }
 
 #resource "helm_release" "argocd" {
