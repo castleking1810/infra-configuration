@@ -5,11 +5,13 @@ resource "kubernetes_namespace_v1" "argocd" {
 }
 
 resource "helm_release" "traefik" {
-  name       = "traefik_ingress"
+  name       = "traefik"
   namespace  = "argocd"
   repository = "https://helm.traefik.io/traefik"
   chart      = "traefik"
   values     = ["${file("${path.module}/values/traefik.yaml")}"]
+
+
 }
 
 #resource "helm_release" "argocd" {
