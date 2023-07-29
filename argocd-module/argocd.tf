@@ -4,6 +4,16 @@ resource "kubernetes_namespace_v1" "argocd" {
   }
 }
 
+resource "helm_release" "argocd" {
+  name       = "argocd"
+  namespace  = "argocd"
+  repository = "https://argoproj.github.io/argo-helm"
+  chart      = "argo-cd"
+  values     = ["${file("${path.module}/values/argocd.yaml")}"]
+
+
+}
+
 resource "helm_release" "traefik" {
   name       = "traefik"
   namespace  = "argocd"
