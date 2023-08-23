@@ -235,6 +235,9 @@ configs:
     # -- Open-Telemetry collector address: (e.g. "otel-collector:4317")
     otlp.address: ""
 
+    # enable argocd to monitor all namespaces
+    application.namespaces: "*"
+
     ## Controller Properties
     # -- Number of application status processors
     controller.status.processors: 20
