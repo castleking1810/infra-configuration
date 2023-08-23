@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: default
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: app-of-apps
+spec:
+  source:
+    path: "./applications"
+    repoURL: "https://github.com/castleking1810/infra-configuration"
+    targetRevision: HEAD
+    directory:
+      recurse: true
+      exclude: "*/values.yaml"
+      include: "*.yaml"
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

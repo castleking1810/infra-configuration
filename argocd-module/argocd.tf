@@ -24,6 +24,11 @@ resource "helm_release" "traefik" {
 
 }
 
+resource "kubernetes_manifest" "argocd-app-of-apps" {
+  manifest   = yamldecode("${file("${path.module}/app-of-apps.yaml")}")
+  depends_on = [helm_release.argocd]
+}
+
 #resource "helm_release" "argocd" {
 #  repository = "https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd"
 #  namespace = "argocd"
