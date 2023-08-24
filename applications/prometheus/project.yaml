@@ -13,16 +13,28 @@ spec:
   # Allow manifests to deploy from any Git repos
   sourceRepos:
     - "*"
+
   # allow applications to be deployed only to argocd and prometheus namespaces
   sourceNamespaces:
     - "argocd"
     - "prometheus"
+
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   # Destination clusters can be identified by 'server', 'name', or both.
   destinations:
     - namespace: prometheus
       server: https://kubernetes.default.svc
       name: in-cluster
+
+  # enable cluster-scoped resources to be created
+  clusterResourceWhitelist:
+    - group: ""
+      kind: "*"
+
+  # enable all namespaced-scoped resources to be created
+  namespaceResourceWhitelist:
+    - group: ""
+      kind: "*"
 
   # Enables namespace orphaned resource monitoring.
   orphanedResources:
