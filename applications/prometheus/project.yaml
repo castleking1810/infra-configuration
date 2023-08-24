@@ -19,10 +19,12 @@ spec:
     - "argocd"
     - "prometheus"
 
-  # Only permit applications to deploy to the guestbook namespace in the same cluster
-  # Destination clusters can be identified by 'server', 'name', or both.
+  # Only permit applications to deploy to the prometheus and kube-system namespace in the same cluster
   destinations:
     - namespace: prometheus
+      server: https://kubernetes.default.svc
+      name: in-cluster
+    - namespace: kube-system
       server: https://kubernetes.default.svc
       name: in-cluster
 
