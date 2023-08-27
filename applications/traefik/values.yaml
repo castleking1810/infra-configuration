@@ -301,11 +301,11 @@ metrics:
     # -- Entry point used to expose metrics.
     entryPoint: metrics
     ## Enable metrics on entry points. Default=true
-    # addEntryPointsLabels: false
+    addEntryPointsLabels: true
     ## Enable metrics on routers. Default=false
     addRoutersLabels: true
     ## Enable metrics on services. Default=true
-    # addServicesLabels: false
+    addServicesLabels: false
     ## Buckets for latency metrics. Default="0.1,0.3,1.2,5.0"
     # buckets: "0.5,1.0,2.5"
     ## When manualRouting is true, it disables the default internal router in
@@ -572,7 +572,7 @@ ports:
     # -- You may not want to expose the metrics port on production deployments.
     # If you want to access it from outside your cluster,
     # use `kubectl port-forward` or create a secure ingress
-    expose: false
+    expose: true
     # -- The exposed port for this service
     exposedPort: 9100
     # -- The port protocol (TCP/UDP)
