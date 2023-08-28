@@ -897,7 +897,7 @@ grafana:
     ##
     # hosts:
     #   - grafana.domain.com
-    hosts: [localhost]
+    hosts: [grafana.local]
 
     ## Path for grafana ingress
     path: /
@@ -2698,7 +2698,7 @@ prometheus:
     ##
     # hosts:
     #   - prometheus.domain.com
-    hosts: [localhost]
+    hosts: [prometheus.local]
 
     ## Paths to use for ingress rules - one path should match the prometheusSpec.routePrefix
     ##
