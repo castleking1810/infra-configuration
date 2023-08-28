@@ -5,13 +5,16 @@ metadata:
   namespace: traefik
 spec:
   project: traefik
-  source:
-    repoURL: https://traefik.github.io/charts
-    targetRevision: "*.*.*"
-    chart: traefik
-    helm:
-      valueFiles:
-        - values.yaml
+  sources:
+    - repoURL: https://traefik.github.io/charts
+      targetRevision: "*.*.*"
+      chart: traefik
+      helm:
+        valueFiles:
+          - $values/applications/traefik/values.yaml
+    - repoURL: "https://github.com/castleking1810/infra-configuration.git"
+      targetRevision: master
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
