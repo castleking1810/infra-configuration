@@ -5,13 +5,16 @@ metadata:
   namespace: prometheus
 spec:
   project: prometheus-stack
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: "*.*.*"
-    chart: kube-prometheus-stack
-    helm:
-      valueFiles:
-        - values.yaml
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      targetRevision: "*.*.*"
+      chart: kube-prometheus-stack
+      helm:
+        valueFiles:
+          - $values/applications/prometheus/values.yaml
+    - repoURL: "https://github.com/castleking1810/infra-configuration.git"
+      targetRevision: master
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: prometheus
