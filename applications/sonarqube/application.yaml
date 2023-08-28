@@ -5,13 +5,16 @@ metadata:
   namespace: sonarqube
 spec:
   project: sonarqube
-  source:
-    repoURL: https://SonarSource.github.io/helm-chart-sonarqube
-    targetRevision: "*.*.*"
-    chart: sonarqube
-    helm:
-      valueFiles:
-        - values.yaml
+  sources:
+    - repoURL: https://SonarSource.github.io/helm-chart-sonarqube
+      targetRevision: "*.*.*"
+      chart: sonarqube
+      helm:
+        valueFiles:
+          - $values/applications/sonarqube/values.yaml
+    - repoURL: "https://github.com/castleking1810/infra-configuration.git"
+      targetRevision: master
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: sonarqube
