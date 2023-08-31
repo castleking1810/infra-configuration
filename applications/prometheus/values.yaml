@@ -890,7 +890,7 @@ grafana:
 
     ## Labels to be added to the Ingress
     ##
-    labels: { ingress:traefik, app:grafana }
+    labels: { ingress: traefik, app: grafana }
 
     ## Hostnames.
     ## Must be provided if Ingress is enable.
@@ -2688,7 +2688,7 @@ prometheus:
     # ingressClassName: nginx
 
     annotations: {}
-    labels: { ingress:traefik, app:prometheus }
+    labels: { ingress: traefik, app: prometheus }
 
     ## Redirect ingress to an additional defined port on the service
     # servicePort: 8081
