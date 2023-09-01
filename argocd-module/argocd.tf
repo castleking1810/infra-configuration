@@ -14,15 +14,15 @@ resource "helm_release" "argocd" {
 
 }
 
-resource "helm_release" "traefik" {
-  name       = "traefik"
-  namespace  = "argocd"
-  repository = "https://helm.traefik.io/traefik"
-  chart      = "traefik"
-  values     = ["${file("${path.module}/values/traefik.yaml")}"]
+# resource "helm_release" "traefik" {
+#   name       = "traefik"
+#   namespace  = "argocd"
+#   repository = "https://helm.traefik.io/traefik"
+#   chart      = "traefik"
+#   values     = ["${file("${path.module}/values/traefik.yaml")}"]
 
 
-}
+# }
 
 resource "kubernetes_manifest" "argocd-app-of-apps" {
   manifest   = yamldecode("${file("${path.module}/app-of-apps.yaml")}")
