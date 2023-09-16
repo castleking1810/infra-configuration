@@ -1,0 +1,47 @@
+//devcontainer.json
+{
+  "name": "terraform",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "installSentinel": true,
+      "installTFsec": true,
+      "installTerraformDocs": true,
+      "version": "latest",
+      "tflint": "latest",
+      "terragrunt": "latest"
+    },
+    "ghcr.io/devcontainers-contrib/features/argo-cd:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "latest",
+      "helm": "latest",
+      "minikube": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-kubernetes-tools.vscode-aks-tools",
+        "ms-azuretools.vscode-azureterraform",
+        "dzhavat.bracket-pair-toggler",
+        "github.vscode-github-actions",
+        "hashicorp.hcl",
+        "hashicorp.terraform",
+        "Maarti.jenkins-doc",
+        "janjoerke.jenkins-pipeline-linter-connector",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-vscode.live-server",
+        "esbenp.prettier-vscode",
+        "snyk-security.snyk-vulnerability-scanner",
+        "SonarSource.sonarlint-vscode",
+        "vscode-icons-team.vscode-icons",
+        "redhat.vscode-yaml",
+        "owenfarrell.vscode-vault"
+      ]
+    }
+  },
+  "postCreateCommand": "alias tf='terraform'"
+  // "remoteUser": "root"
+}
