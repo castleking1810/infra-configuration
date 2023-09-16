@@ -22,12 +22,6 @@
   },
   "customizations": {
     "vscode": {
-      "settings": {
-        "terraform.languageServer": {
-          "enabled": true,
-          "args": []
-        }
-      },
       "extensions": [
         "ms-kubernetes-tools.vscode-aks-tools",
         "ms-azuretools.vscode-azureterraform",
