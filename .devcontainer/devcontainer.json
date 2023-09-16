@@ -13,6 +13,11 @@
     },
     "ghcr.io/devcontainers-contrib/features/argo-cd:1": {
       "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "latest",
+      "helm": "latest",
+      "minikube": "latest"
     }
   },
   "customizations": {
