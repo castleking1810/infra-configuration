@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: loki
+spec:
+  project: loki
+  sources:
+    - repoURL: https://grafana.github.io/helm-charts
+      targetRevision: "*.*.*"
+      chart: loki
+      helm:
+        valueFiles:
+          - $values/applications/loki/values.yaml
+    - repoURL: "https://github.com/castleking1810/infra-configuration.git"
+      targetRevision: master
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: loki
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
