@@ -117,9 +117,7 @@ experimental:
   v3:
     # -- Enable traefik version 3
     enabled: false
-  plugins:
-    # -- Enable traefik experimental plugins
-    enabled: false
+  plugins: {}
   kubernetesGateway:
     # -- Enable traefik experimental GatewayClass CRD
     enabled: false
