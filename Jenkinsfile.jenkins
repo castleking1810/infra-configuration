@@ -13,6 +13,7 @@ def findProviders(path){
 //global parameter for provider choice
 def provider
 
+// TODO: parameterize vaultURL
 // vault config
 def configuration = [engineVersion: 2,
                      skipSslVerification: true,
@@ -20,8 +21,9 @@ def configuration = [engineVersion: 2,
                      vaultCredentialId: 'jenkins-vault-app-role',
                      vaultUrl: 'http://vault.consolenetwork.com:8200']
 
+// TODO: enable dynamic provider adding in secrets - check implemntation fo function which recives provider and returns secrets object
 def secrets = [[engineVersion: 2,
-                path: '/kv/azure-sp',
+                path: '/kv/infra-configuration/azure',
                 secretValues: [
                     [envVar: 'ARM_CLIENT_ID', vaultKey: 'client_id'],
                     [envVar: 'ARM_CLIENT_SECRET', vaultKey: 'client_secret'],
@@ -34,11 +36,6 @@ pipeline {
 
     // agents to run on
     agent any
-
-    // set build parameters
-    //parameters{
-    //    choice(name: 'provider', choices: findDirectories('.') , description:'select a cloud provider to deploy to')
-    //}
 
     // set stages
     stages {
@@ -54,7 +51,7 @@ pipeline {
         stage('Choose provider') {
             steps {
                 script {
-
+                    // TODO: move providers into a "providers" folder, and run findProviders on that folder
                     // execute findProviders on build workspace
                     def providers = findProviders(pwd())
 
@@ -67,11 +64,8 @@ pipeline {
                 }
             }
         }
-        //stage('import tf env variables'){
-        //    steps{
-        //        sh '. /etc/cicd/tf/sp.env'
-        //    }
-        //}
+        
+        
         stage('plan deplyoment') {
             steps {
                 dir(provider) {
