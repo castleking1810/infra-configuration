@@ -7,7 +7,7 @@ spec:
   project: sonarqube
   sources:
     - repoURL: https://SonarSource.github.io/helm-chart-sonarqube
-      targetRevision: "*.*.*"
+      targetRevision: "10.5.1+2816"
       chart: sonarqube
       helm:
         valueFiles:
