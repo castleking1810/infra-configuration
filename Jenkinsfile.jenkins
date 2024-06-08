@@ -53,7 +53,7 @@ pipeline {
                 script {
                     // TODO: move providers into a "providers" folder, and run findProviders on that folder
                     // execute findProviders on build workspace
-                    def providers = findProviders(pwd())
+                    def providers = findProviders(pwd()+"/providers")
 
                     // prompt user for cloud deployment target, using the providers list generated
                     provider = input(
@@ -68,7 +68,7 @@ pipeline {
         
         stage('plan deplyoment') {
             steps {
-                dir(provider) {
+                dir("providers/"+provider) {
                     withVault(configuration: configuration, vaultSecrets: secrets) {
                         sh 'terraform init -upgrade'
                         sh 'terraform plan'
