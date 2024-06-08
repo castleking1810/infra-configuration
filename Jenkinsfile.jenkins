@@ -81,7 +81,7 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                dir(provider){
+                dir("providers/"+provider){
                     withVault(configuration: configuration, vaultSecrets: secrets) {
                         sh 'terraform apply -auto-approve'
                     }
