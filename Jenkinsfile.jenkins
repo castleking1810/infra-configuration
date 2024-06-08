@@ -43,7 +43,7 @@ pipeline {
         // checkout code from github
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/castleking1810/infra-configuration.git'
+                git branch: 'master', url: 'https://github.com/ereldag/infra-configuration.git'
             }
         }
 

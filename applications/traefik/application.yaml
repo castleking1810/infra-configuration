@@ -12,7 +12,7 @@ spec:
       helm:
         valueFiles:
           - $values/applications/traefik/values.yaml
-    - repoURL: "https://github.com/castleking1810/infra-configuration.git"
+    - repoURL: "https://github.com/ereldag/infra-configuration.git"
       targetRevision: master
       ref: values
   destination:
