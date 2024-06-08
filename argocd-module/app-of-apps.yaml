@@ -10,7 +10,7 @@ metadata:
 spec:
   source:
     path: "./applications"
-    repoURL: "https://github.com/castleking1810/infra-configuration"
+    repoURL: "https://github.com/ereldag/infra-configuration"
     targetRevision: HEAD
     directory:
       recurse: true
