@@ -53,7 +53,7 @@ pipeline {
                 script {
                     // TODO: move providers into a "providers" folder, and run findProviders on that folder
                     // execute findProviders on build workspace
-                    def providers = def providers = sh (
+                    def providers = sh (
                         script: 'find providers -mindepth 1 -maxdepth 1 -type d -printf "%f\n"',
                         returnStdout: true
                     ).trim()
