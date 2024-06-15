@@ -22,8 +22,29 @@ def secrets = [[engineVersion: 2,
 
 pipeline {
 
-    // agents to run on
-    agent any
+    // setup agent on a new pod (using k8s plugin)
+    agent {
+        kubernetes {
+            yaml '''
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              labels:
+                some-label: some-label-value
+            spec:
+              serviceAccountName: jenkins-tf
+              containers:
+              - name: jnlp
+                image: jenkins/jnlp-agent-terraform
+                tty: true
+                env:
+                - name: JENKINS_URL
+                  value: http://jenkins.jenkins.svc.cluster.local:8080/
+                
+            '''
+            retries 1
+        }
+    }
 
     // set stages
     stages {
