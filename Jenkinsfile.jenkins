@@ -6,8 +6,8 @@ def provider
 def configuration = [engineVersion: 2,
                      skipSslVerification: true,
                      timeout: 60,
-                     vaultCredentialId: 'jenkins-vault-app-role',
-                     vaultUrl: 'http://vault.consolenetwork.com:8200']
+                     vaultCredentialId: 'jenkins-tf',
+                     vaultUrl: 'http://vault.vault:8200']
 
 // TODO: enable dynamic provider adding in secrets - check implemntation fo function which recives provider and returns secrets object
 def secrets = [[engineVersion: 2,
