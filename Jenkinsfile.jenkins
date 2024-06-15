@@ -1,15 +1,3 @@
-// gets list of currently supported cloud providers from available folders
-def findProviders(path){
-    def dirs = []
-    //get files from root dir, and loop over them to find relevant dirs
-    new File(path).listFiles().each { file ->
-        if (file.isDirectory()) {
-            dirs.add(file.getName())
-        }
-    }
-    return dirs
-}
-
 //global parameter for provider choice
 def provider
 
@@ -51,9 +39,11 @@ pipeline {
         stage('Choose provider') {
             steps {
                 script {
-                    // TODO: move providers into a "providers" folder, and run findProviders on that folder
-                    // execute findProviders on build workspace
-                    def providers = findProviders(pwd()+"/providers")
+                    // list providers
+                    def providers = sh (
+                        script: 'ls providers/',
+                        returnStdout: true
+                    ).trim()
 
                     // prompt user for cloud deployment target, using the providers list generated
                     provider = input(
@@ -61,6 +51,7 @@ pipeline {
                         message: 'Choose a cloud provider to deploy its managed k8s service:',
                         parameters: [choice(choices: providers, name: 'Provider')]
                     )
+                }
                 }
             }
         }
