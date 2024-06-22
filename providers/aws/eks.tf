@@ -20,7 +20,8 @@ module "eks" {
     }
   }
 
-  vpc_id = var.vpc_name
+  vpc_id                   = var.vpc_id
+  control_plane_subnet_ids = data.aws_subnets.private.ids
 
   # Cluster access entry
   # To add the current caller identity as an administrator
