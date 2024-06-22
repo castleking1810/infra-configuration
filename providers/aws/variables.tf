@@ -12,8 +12,8 @@ variable "kubernetes_version" {
   description = "k8s version for the cluster"
 }
 
-variable "vpc_name" {
-  default     = "my-k8s-vpc"
+variable "vpc_id" {
+  default     = "vpc-093c11df66ac7e6b7"
   description = "name of VPC where cluster will be created"
 }
 
